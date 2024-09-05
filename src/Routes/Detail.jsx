@@ -24,7 +24,7 @@ const Detail = () => {
   return (
     <>
       <button onClick={() => navigate(-1)}>🔙</button>
-      <h1>Detail Dentist id </h1>
+      <h1>Detail Dentist {id} - {data.name}</h1>
       {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
       {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
       <p>Name: {data.name}</p>

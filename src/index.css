@@ -22,7 +22,9 @@ code {
   margin: 5px 0 10px 0;
   border: none;
   width: 100%;
+  border-radius: 20px;
   cursor: pointer;
+  transition: .2s all ease-in-out;
 }
 
 h1 {
@@ -81,6 +83,7 @@ a {
   text-decoration: none;
   margin: 5px;
   cursor: pointer;
+  transition: .2s all ease-in-out;
 }
 
 a:hover {
@@ -127,11 +130,13 @@ form {
   width: 200px;
   padding: 0.5rem 0.5rem 0 0.5rem;
   border: 0.5px solid rgb(136, 136, 136);
+  border-radius: 20px;
 }
 
 .card img {
   max-width: fit-content;
   width: 100%;
+  border-radius: 20px;
 }
 
 .card:hover {
@@ -151,13 +156,17 @@ form {
   margin: 0 auto;
 }
 
+.isFavorite {
+  color: var(--yellow);
+  background-color: rgba(48, 48, 48, 0.5);
+}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
   display: table;
   border: 1px solid #ccc;
-
 }
 
 td,
