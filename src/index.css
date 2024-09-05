@@ -19,6 +19,7 @@ code {
 .favButton {
   background-color: rgba(136, 136, 136, 0.116);
   padding: 10px;
+  margin: 5px 0 10px 0;
   border: none;
   width: 100%;
   cursor: pointer;
@@ -122,9 +123,15 @@ form {
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
+  max-width: 200px;
   width: 200px;
   padding: 0.5rem 0.5rem 0 0.5rem;
   border: 0.5px solid rgb(136, 136, 136);
+}
+
+.card img {
+  max-width: fit-content;
+  width: 100%;
 }
 
 .card:hover {
@@ -133,9 +140,12 @@ form {
 
 .card-grid {
   display: flex;
-  justify-content: space-evenly;
+  /* width: 90vw; */
+  width: 100%;
+  max-width: 85%;
+  justify-content: left;
+  align-items: center;
   gap: 1rem;
-  width: 90vw;
   height: auto;
   flex-wrap: wrap;
   margin: 0 auto;
