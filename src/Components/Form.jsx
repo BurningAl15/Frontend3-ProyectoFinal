@@ -16,7 +16,7 @@ const Form = ({ theme }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(false);
-    }, 2000); // Adjust the duration as needed (2000 milliseconds = 2 seconds)
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [savedUser]);
@@ -41,11 +41,13 @@ const Form = ({ theme }) => {
 
     switch (fieldName) {
       case "name":
-        if (!nameRegex.test(value)) {
+        // Nombre completo (con longitud mayor a 5)
+        if (!nameRegex.test(value) || value.length < 5) {
           error = "Please enter a full name (first and last)";
         }
         break;
       case "email":
+        // Email (con formato correcto de email)
         if (!emailRegex.test(value)) {
           error = "Please enter an email";
         }
@@ -58,9 +60,11 @@ const Form = ({ theme }) => {
   };
 
   const hasError = () => {
-    const hasEmptyFields = Object.values(user).some((userValue) => userValue === "");
+    const hasEmptyFields = Object.values(user).some(
+      (userValue) => userValue === ""
+    );
     const hasErrors = Object.values(errors).some((error) => error !== "");
-  
+
     return hasEmptyFields || hasErrors;
   };
 

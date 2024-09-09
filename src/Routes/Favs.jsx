@@ -4,6 +4,7 @@ import { useGlobalContext } from "../Context/global.context";
 import useFetchData from "../hooks/useFetchData";
 import { Loader } from "../Components/Loader";
 import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Favs = () => {
   const { theme, favIds } = useGlobalContext();
@@ -34,15 +35,25 @@ const Favs = () => {
         {/* este componente debe consumir los destacados del localStorage */}
         {/* Deberan renderizar una Card por cada uno de ellos */}
 
-        {filteredData(favIds).map((item) => (
-          <Card
-            key={item.id}
-            name={item.name}
-            username={item.username}
-            id={item.id}
-            item={item}
-          />
-        ))}
+        {favIds.length > 0 &&
+          filteredData(favIds).map((item) => (
+            <Card
+              key={item.id}
+              name={item.name}
+              username={item.username}
+              id={item.id}
+              item={item}
+            />
+          ))}
+
+        {favIds.length <= 0 && (
+          <div>
+            <p>No Dentists set as favorites yet</p>
+            {/* Img */}
+            <Link to="/">Go to Home</Link>
+            <p>To select some favorite dentists</p>
+          </div>
+        )}
       </div>
 
       <ToastContainer />
