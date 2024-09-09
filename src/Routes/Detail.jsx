@@ -3,16 +3,23 @@ import useFetchData from "../hooks/useFetchData";
 import { Loader } from "../Components/Loader";
 import { useGlobalContext } from "../Context/global.context";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { getCurrentLanguage } from "../Utils/languageUtils";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 const Detail = () => {
-  const { theme } = useGlobalContext();
+  const { theme, language } = useGlobalContext();
   const navigate = useNavigate();
   const { id } = useParams();
 
   const { data, error, isLoading } = useFetchData(
     `https://jsonplaceholder.typicode.com/users/${id}`
   );
+
+  if (language === "") return;
+
+  const currentLanguage = getCurrentLanguage(language);
+  const { detailDentist, emailTable, phone, name, website } =
+    currentLanguage.words;
 
   if (isLoading) {
     return (
@@ -37,26 +44,32 @@ const Detail = () => {
         type="button"
         onClick={() => navigate(-1)}
       >
-        <IoMdArrowRoundBack size={30} color={`${theme === "dark" ? "#ededed" : "#303030"}`}/>
+        <IoMdArrowRoundBack
+          size={30}
+          color={`${theme === "dark" ? "#ededed" : "#303030"}`}
+        />
       </button>
       <div className="details-container">
         <h1>
-          Detail Dentist {id} - {data.name}
+          {detailDentist}
+          {id} - {data.name}
         </h1>
         {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
         {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
         <table className={`${theme === "dark" ? "dark-mode" : ""}`}>
           <thead>
             <tr className={`${theme === "dark" ? "dark-mode" : ""}`}>
-              <th className={`${theme === "dark" ? "dark-mode" : ""}`}>Name</th>
               <th className={`${theme === "dark" ? "dark-mode" : ""}`}>
-                Email
+                {name}
               </th>
               <th className={`${theme === "dark" ? "dark-mode" : ""}`}>
-                Phone
+                {emailTable}
               </th>
               <th className={`${theme === "dark" ? "dark-mode" : ""}`}>
-                Website
+                {phone}
+              </th>
+              <th className={`${theme === "dark" ? "dark-mode" : ""}`}>
+                {website}
               </th>
             </tr>
           </thead>

@@ -4,13 +4,19 @@ import useFetchData from "../hooks/useFetchData";
 import { Loader } from "../Components/Loader";
 import { useGlobalContext } from "../Context/global.context";
 import { ToastContainer } from "react-toastify";
+import { getCurrentLanguage } from "../Utils/languageUtils";
 
 const Home = () => {
-  const { theme } = useGlobalContext();
+  const { theme, language } = useGlobalContext();
 
   const { data, error, isLoading } = useFetchData(
     "https://jsonplaceholder.typicode.com/users"
   );
+
+  if (language === "") return;
+
+  const currentLanguage = getCurrentLanguage(language);
+  const { home } = currentLanguage.words;
 
   if (isLoading) {
     return (
@@ -29,7 +35,7 @@ const Home = () => {
 
   return (
     <main className={`layout min-height ${theme === "dark" && "layout-bg"}`}>
-      <h1>Home</h1>
+      <h1>{home}</h1>
       <div className="card-grid">
         {/* Aqui deberias renderizar las cards */}
         {data.map((item) => (

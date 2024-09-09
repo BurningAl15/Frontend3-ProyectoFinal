@@ -3,9 +3,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { createContext, useEffect, useContext, useReducer } from "react";
 
-export const initialState = { theme: "", favIds: [] };
+export const initialState = { theme: "", favIds: [], language: "" };
 
 export const GlobalContext = createContext(undefined);
+
+const favIdsKey = "favIds";
+const darkModeKey = "darkMode";
+const languageKey = "language";
 
 const reducer = (state, action) => {
   const theme = state.theme === "light" ? "dark" : "light";
@@ -15,7 +19,7 @@ const reducer = (state, action) => {
     case "INITIAL_THEME":
       return { ...state, theme: action.payload };
     case "TOGGLE_THEME":
-      localStorage.setItem("darkMode", JSON.stringify({ theme }));
+      localStorage.setItem(darkModeKey, JSON.stringify({ theme }));
       return { ...state, theme: theme };
 
     // Favorites
@@ -48,6 +52,16 @@ const reducer = (state, action) => {
         ...state,
         favIds: action.payload,
       };
+
+    // Language
+    case "SET_LANGUAGE":
+      localStorage.setItem(
+        languageKey,
+        JSON.stringify({ language: action.payload })
+      );
+      console.log(`Language ${action.payload}`)
+      return { ...state, language: action.payload };
+
     default:
       return state;
   }
@@ -57,22 +71,29 @@ export const Context = ({ children }) => {
   //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { favIds, theme } = state;
-  const key = "favIds";
+  const { favIds, theme, language } = state;
 
   const notifyAdding = (name) => toast(`${name} added to favs`);
   const notifyRemoving = (name) => toast(`${name} removed from favs`);
 
   useEffect(() => {
-    const tempTheme = localStorage.getItem("darkMode");
+    const tempTheme = localStorage.getItem(darkModeKey);
     dispatch({
       type: "INITIAL_THEME",
       payload: tempTheme ? JSON.parse(tempTheme).theme : "light",
     });
 
+    const tempLanguage = localStorage.getItem(languageKey);
+
+    setLanguage(tempTheme ? JSON.parse(tempLanguage).language : "EN")
+
     loadFavs();
   }, []);
 
+  // THEME
+  const toggleTheme = () => dispatch({ type: "TOGGLE_THEME" });
+
+  // FAVORITES
   const addFav = async (id) => {
     if (!id) {
       console.error("Invalid fav ID");
@@ -108,7 +129,7 @@ export const Context = ({ children }) => {
   };
 
   const loadFavs = async () => {
-    const storedFavIds = localStorage.getItem(key);
+    const storedFavIds = localStorage.getItem(favIdsKey);
 
     if (storedFavIds) {
       try {
@@ -124,17 +145,22 @@ export const Context = ({ children }) => {
 
   const saveFavs = async (favIdsToSave) => {
     try {
-      localStorage.setItem(key, JSON.stringify(favIdsToSave));
+      localStorage.setItem(favIdsKey, JSON.stringify(favIdsToSave));
     } catch (error) {
       console.error("Error saving fav IDs:", error);
     }
+  };
+
+  // LANGUAGE
+  const setLanguage = (la) => {
+    dispatch({ type: "SET_LANGUAGE", payload: la });
   };
 
   return (
     <GlobalContext.Provider
       value={{
         theme,
-        toggleTheme: () => dispatch({ type: "TOGGLE_THEME" }),
+        toggleTheme,
 
         favIds,
         addFav,
@@ -142,6 +168,9 @@ export const Context = ({ children }) => {
         checkIfIsFavorite,
         notifyAdding,
         notifyRemoving,
+
+        language,
+        setLanguage,
       }}
     >
       {children}

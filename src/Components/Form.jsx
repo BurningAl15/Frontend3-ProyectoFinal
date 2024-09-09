@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { getCurrentLanguage, messageComplete } from "../Utils/languageUtils";
 
 const initialState = {
   name: "",
   email: "",
 };
 
-const Form = ({ theme }) => {
+const Form = ({ theme, language }) => {
   //Aqui deberan implementar el form completo con sus validaciones
   const [user, setUser] = useState(initialState);
   const [savedUser, setSavedUser] = useState(initialState);
@@ -20,6 +21,13 @@ const Form = ({ theme }) => {
 
     return () => clearTimeout(timer);
   }, [savedUser]);
+
+  if (language === "") return;
+
+  const currentLanguage = getCurrentLanguage(language);
+
+  const { fullName, email, send, errorName, errorEmail } =
+    currentLanguage.words;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,13 +51,13 @@ const Form = ({ theme }) => {
       case "name":
         // Nombre completo (con longitud mayor a 5)
         if (!nameRegex.test(value) || value.length < 5) {
-          error = "Please enter a full name (first and last)";
+          error = errorName;
         }
         break;
       case "email":
         // Email (con formato correcto de email)
         if (!emailRegex.test(value)) {
-          error = "Please enter an email";
+          error = errorEmail;
         }
         break;
       default:
@@ -76,7 +84,7 @@ const Form = ({ theme }) => {
       >
         <div className="form-container">
           <div className="form-section">
-            <label htmlFor="name">Full Name:</label>
+            <label htmlFor="name">{fullName}</label>
             <input
               type="text"
               name="name"
@@ -88,7 +96,7 @@ const Form = ({ theme }) => {
           </div>
 
           <div className="form-section">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">{email}</label>
             <input
               type="text"
               name="email"
@@ -107,12 +115,13 @@ const Form = ({ theme }) => {
           disabled={hasError()}
           style={!hasError() ? { cursor: "pointer" } : {}}
         >
-          Send
+          {send}
         </button>
 
         {show && (
           <span className="message">
-            Gracias {savedUser.name}, te contactaremos cuando antes vía mail
+            {/* Gracias {savedUser.name}, te contactaremos cuando antes vía mail */}
+            {messageComplete(language, savedUser.name)}
           </span>
         )}
       </form>

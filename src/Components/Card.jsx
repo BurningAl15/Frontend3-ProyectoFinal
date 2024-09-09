@@ -3,9 +3,23 @@ import { Link } from "react-router-dom";
 import { routes } from "../Utils/routes";
 import { FaStar } from "react-icons/fa";
 import { useGlobalContext } from "../Context/global.context";
+import { getCurrentLanguage } from "../Utils/languageUtils";
 
 const Card = ({ name, username, id }) => {
-  const { theme, addFav, removeFav, checkIfIsFavorite, notifyAdding, notifyRemoving } = useGlobalContext();
+  const {
+    theme,
+    addFav,
+    removeFav,
+    checkIfIsFavorite,
+    notifyAdding,
+    notifyRemoving,
+    language,
+  } = useGlobalContext();
+
+  if (language === "") return;
+
+  const currentLanguage = getCurrentLanguage(language);
+  const { addFV } = currentLanguage.words;
 
   const deleteFavorites = async (e) => {
     e.preventDefault();
@@ -49,7 +63,7 @@ const Card = ({ name, username, id }) => {
               : "isNotFavorite-dark"
           }`}
         >
-          {checkIfIsFavorite(id) ? <FaStar /> : "Add fav"}
+          {checkIfIsFavorite(id) ? <FaStar /> : addFV}
         </button>
       </Link>
     </>

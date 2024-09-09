@@ -5,13 +5,19 @@ import useFetchData from "../hooks/useFetchData";
 import { Loader } from "../Components/Loader";
 import { ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
+import { getCurrentLanguage } from "../Utils/languageUtils";
 
 const Favs = () => {
-  const { theme, favIds } = useGlobalContext();
+  const { theme, favIds, language } = useGlobalContext();
 
   const { filteredData, error, isLoading } = useFetchData(
     "https://jsonplaceholder.typicode.com/users"
   );
+
+  if (language === "") return;
+
+  const currentLanguage = getCurrentLanguage(language);
+  const { dentistFavs } = currentLanguage.words;
 
   if (isLoading) {
     return (
@@ -30,7 +36,7 @@ const Favs = () => {
 
   return (
     <div className={`layout min-height ${theme === "dark" && "layout-bg"}`}>
-      <h1>Dentists Favs</h1>
+      <h1>{dentistFavs}</h1>
       <div className="card-grid">
         {/* este componente debe consumir los destacados del localStorage */}
         {/* Deberan renderizar una Card por cada uno de ellos */}
