@@ -1,7 +1,7 @@
 import dhImage from "../assets/DH.png";
 import dhImageLight from "../assets/DH-light.png";
 
-import { useDarkModeStates } from "../Context/global.context";
+import { useGlobalContext } from "../Context/global.context";
 
 import icoInstagram from "../assets/ico-instagram.png";
 import icoFacebook from "../assets/ico-facebook.png";
@@ -14,7 +14,7 @@ import icoTiktokDark from "../assets/ico-tiktok-Dark.png";
 import icoWhatsappDark from "../assets/ico-whatsapp-Dark.png";
 
 const Footer = () => {
-  const { theme } = useDarkModeStates();
+  const { theme } = useGlobalContext();
 
   const socialMedia = [
     {

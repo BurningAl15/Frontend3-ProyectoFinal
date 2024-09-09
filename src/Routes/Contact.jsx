@@ -1,10 +1,10 @@
 import Form from "../Components/Form";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
-import { useDarkModeStates } from "../Context/global.context";
+import { useGlobalContext } from "../Context/global.context";
 
 const Contact = () => {
-  const { theme } = useDarkModeStates();
+  const { theme } = useGlobalContext();
 
   return (
     <div className={`layout min-height ${theme === "dark" ? "layout-bg" : ""}`}>

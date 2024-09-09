@@ -2,11 +2,11 @@ import Card from "../Components/Card";
 import useFetchData from "../hooks/useFetchData";
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 import { Loader } from "../Components/Loader";
-import { useDarkModeStates } from "../Context/global.context";
+import { useGlobalContext } from "../Context/global.context";
 import { ToastContainer } from "react-toastify";
 
 const Home = () => {
-  const { theme } = useDarkModeStates();
+  const { theme } = useGlobalContext();
 
   const { data, error, isLoading } = useFetchData(
     "https://jsonplaceholder.typicode.com/users"
@@ -38,7 +38,6 @@ const Home = () => {
             name={item.name}
             username={item.username}
             id={item.id}
-            // item={item}
           />
         ))}
       </div>

@@ -1,23 +1,22 @@
 import doctorImage from "../assets/doctor.jpg";
 import { Link } from "react-router-dom";
 import { routes } from "../Utils/routes";
-import { useStorageFav } from "../hooks/useStorageFav";
 import { FaStar } from "react-icons/fa";
-import { useDarkModeStates } from "../Context/global.context";
+import { useGlobalContext } from "../Context/global.context";
 
 const Card = ({ name, username, id }) => {
-  const { theme } = useDarkModeStates();
-  const { addFavs, deleteFavs, checkIfIsFavorite } = useStorageFav();
+  const { theme, addFav, removeFav, checkIfIsFavorite, notifyAdding, notifyRemoving } = useGlobalContext();
 
   const deleteFavorites = async (e) => {
     e.preventDefault();
-    await deleteFavs(id);
+    await removeFav(id);
+    notifyRemoving(name);
   };
 
   const addFavourite = async (e) => {
     e.preventDefault();
-    const filteredItem = { id, name, username };
-    await addFavs(filteredItem);
+    await addFav(id);
+    notifyAdding(name);
   };
 
   return (

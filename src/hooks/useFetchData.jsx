@@ -22,7 +22,15 @@ function useFetchData(url) {
     fetchData();
   }, [url]);
 
-  return { data, error, isLoading };
+  const filteredData = (arr) => {
+    if (arr === null) return data;
+
+    const filtered = [...data].filter((value) => arr.includes(value.id));
+
+    return filtered;
+  };
+
+  return { data, error, isLoading, filteredData };
 }
 
 export default useFetchData;

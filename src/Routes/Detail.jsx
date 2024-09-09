@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import useFetchData from "../hooks/useFetchData";
 import { Loader } from "../Components/Loader";
-import { useDarkModeStates } from "../Context/global.context";
+import { useGlobalContext } from "../Context/global.context";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 const Detail = () => {
-  const { theme } = useDarkModeStates();
+  const { theme } = useGlobalContext();
   const navigate = useNavigate();
   const { id } = useParams();
 

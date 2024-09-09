@@ -4,10 +4,10 @@ import { routes } from "../Utils/routes";
 import { RiMoonFill } from "react-icons/ri";
 import darkModeTitle from "../assets/DarkModeTitle.png";
 import lightModeTitle from "../assets/LightModeTitle.png";
-import { useDarkModeStates } from "../Context/global.context";
+import { useGlobalContext } from "../Context/global.context";
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useDarkModeStates();
+  const { theme, toggleTheme } = useGlobalContext();
 
   return (
     <nav className={`${theme === "dark" ? "dark-bg" : ""}`}>
