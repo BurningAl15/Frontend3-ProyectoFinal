@@ -354,6 +354,14 @@ footer > .section > a {
   align-items: center;
 }
 
+footer > .section > a.digital {
+  max-width: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 footer > .section > a > img {
   width: 100%;
 }

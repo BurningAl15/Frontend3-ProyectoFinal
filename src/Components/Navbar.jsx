@@ -53,7 +53,7 @@ const Navbar = () => {
           <RiMoonFill />
         </button>
 
-        {/* Instead of this, do a dropdown */}
+        {/* ! Instead of this, do a dropdown */}
         <button
           className={`nav-button ${theme === "dark" ? "light-button" : ""}`}
           onClick={() => setLanguage("ES")}

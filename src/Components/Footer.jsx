@@ -16,6 +16,14 @@ import icoWhatsappDark from "../assets/ico-whatsapp-Dark.png";
 const Footer = () => {
   const { theme } = useGlobalContext();
 
+  const digital = {
+    key: "digital",
+    img: dhImageLight,
+    imgDark: dhImage,
+    alt: "Digital House icon",
+    url: "https://www.digitalhouse.com/",
+  };
+
   const socialMedia = [
     {
       key: "insta",
@@ -51,7 +59,12 @@ const Footer = () => {
     <footer className={`${theme === "dark" ? "dark-mode" : ""}`}>
       <div className="section">
         <p>Powered by</p>
-        <img src={theme === "dark" ? dhImageLight : dhImage} alt="DH-logo" />
+        <a href={digital.url} className="digital">
+          <img
+            src={theme === "dark" ? digital.img : digital.imgDark}
+            alt={digital.alt}
+          />
+        </a>
       </div>
       <div className="section">
         {socialMedia.map((item) => (
