@@ -59,7 +59,6 @@ const reducer = (state, action) => {
         languageKey,
         JSON.stringify({ language: action.payload })
       );
-      console.log(`Language ${action.payload}`)
       return { ...state, language: action.payload };
 
     default:

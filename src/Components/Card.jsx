@@ -4,6 +4,7 @@ import { routes } from "../Utils/routes";
 import { FaStar } from "react-icons/fa";
 import { useGlobalContext } from "../Context/global.context";
 import { getCurrentLanguage } from "../Utils/languageUtils";
+import { motion } from 'framer-motion';
 
 const Card = ({ name, username, id }) => {
   const {
@@ -34,11 +35,14 @@ const Card = ({ name, username, id }) => {
   };
 
   return (
-    <>
+    <motion.div
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.5, y: 1000 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <Link
-        className={`card ${
-          theme === "dark" ? "card-dark layout" : "layout-bg"
-        }`}
+        className={`card ${theme === "dark" ? "card-dark layout" : "layout-bg"
+          }`}
         to={`${routes.detail}/${id}`}
       >
         <img src={doctorImage} alt={`avatar`} />
@@ -53,20 +57,19 @@ const Card = ({ name, username, id }) => {
             if (checkIfIsFavorite(id)) await deleteFavorites(e);
             else await addFavourite(e);
           }}
-          className={`favButton ${
-            checkIfIsFavorite(id)
-              ? theme === "dark"
-                ? "isFavorite"
-                : "isFavorite-dark"
-              : theme === "dark"
+          className={`favButton ${checkIfIsFavorite(id)
+            ? theme === "dark"
+              ? "isFavorite"
+              : "isFavorite-dark"
+            : theme === "dark"
               ? "isNotFavorite"
               : "isNotFavorite-dark"
-          }`}
+            }`}
         >
           {checkIfIsFavorite(id) ? <FaStar /> : addFV}
         </button>
       </Link>
-    </>
+    </motion.div>
   );
 };
 

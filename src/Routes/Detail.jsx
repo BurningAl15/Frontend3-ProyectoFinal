@@ -4,6 +4,7 @@ import { Loader } from "../Components/Loader";
 import { useGlobalContext } from "../Context/global.context";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { getCurrentLanguage } from "../Utils/languageUtils";
+import { motion } from 'framer-motion';
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 const Detail = () => {
@@ -56,7 +57,11 @@ const Detail = () => {
         </h1>
         {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
         {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
-        <table className={`${theme === "dark" ? "dark-mode" : ""}`}>
+        <motion.table
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.5, y: 1000 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className={`${theme === "dark" ? "dark-mode" : ""}`}>
           <thead>
             <tr className={`${theme === "dark" ? "dark-mode" : ""}`}>
               <th className={`${theme === "dark" ? "dark-mode" : ""}`}>
@@ -89,7 +94,7 @@ const Detail = () => {
               </td>
             </tr>
           </tbody>
-        </table>
+        </motion.table>
       </div>
     </div>
   );

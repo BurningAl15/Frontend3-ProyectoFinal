@@ -108,8 +108,12 @@ export const Languages = [
 ];
 
 export const getCurrentLanguage = (language) => {
-  console.log(`Getting current language ${language} -`);
   const filtered = Languages.filter((la) => la.key === language)[0];
+  return filtered;
+};
+
+export const getCurrentLanguage_Obj = (language) => {
+  const filtered = Languages.filter((la) => la.key === language.value)[0];
   return filtered;
 };
 
@@ -118,3 +122,18 @@ export const messageComplete = (language, name) => {
   const { messageStart, messageEnd } = filtered.words;
   return `${messageStart}${name}${messageEnd}`;
 };
+
+
+export const languageOptions = () => {
+  const options = Languages.map((language) => ({
+    value: language.key,
+    label: language.language,
+  }));
+
+  return options;
+}
+
+export const defaultOption = (language) => {
+  const filtered = Languages.filter((la) => la.key === language)[0];
+  return { value: filtered.key, label: filtered.language };
+}

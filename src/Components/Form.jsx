@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getCurrentLanguage, messageComplete } from "../Utils/languageUtils";
+import { motion } from 'framer-motion';
 
 const initialState = {
   name: "",
@@ -78,7 +79,10 @@ const Form = ({ theme, language }) => {
 
   return (
     <>
-      <form
+      <motion.form
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.5, y: -500 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
         onSubmit={handleSubmit}
         className={theme === "light" ? "dark-mode" : ""}
       >
@@ -124,7 +128,7 @@ const Form = ({ theme, language }) => {
             {messageComplete(language, savedUser.name)}
           </span>
         )}
-      </form>
+      </motion.form>
     </>
   );
 };
