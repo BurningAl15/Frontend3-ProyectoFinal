@@ -5,7 +5,7 @@ import Navbar from "./Components/Navbar";
 
 import { routes } from "./Utils/routes";
 
-import { Home, Detail, Favs, Contact } from './Routes'
+import { Home, Detail, Favs, Contact } from "./Routes";
 
 function App() {
   return (
