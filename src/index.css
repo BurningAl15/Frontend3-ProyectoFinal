@@ -1,18 +1,27 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    sans-serif; */
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   --background-dark: #303030;
   --background-semi-dark: #474747;
+
+  --button-card-bg-dark: rgb(98, 98, 98);
+  --button-card-bg-pressed-dark: rgba(255, 0, 0, 0.5);
+  --button-card-bg-light: rgba(254, 254, 254, 0.75);
+  --button-card-bg-pressed-light: rgba(255, 0, 0, 0.5);
+
+  --button-disabled: rgb(145, 145, 145);
 
   --background-light: #ededed;
   --background-semi-light: #dddddd;
 
   --yellow: #ffee00;
-  --darkyellow: #c9bc00;
+  --darkyellow: #322f00;
 }
 
 .layout {
@@ -30,7 +39,7 @@ body {
 }
 
 .min-height {
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 .flex {
@@ -41,13 +50,17 @@ body {
 }
 
 .favButton {
-  background-color: rgba(136, 136, 136, 0.116);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rgba(136, 136, 136, 0.116); */
   padding: 10px;
   margin: 5px 0 10px 0;
   border: none;
   width: 100%;
   border-radius: 20px;
   cursor: pointer;
+  gap:10px;
   transition: 0.2s all ease-in-out;
 }
 
@@ -89,7 +102,7 @@ nav {
 
 nav .link-container {
   display: flex;
-  max-width: 30%;
+  max-width: 40%;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
@@ -104,7 +117,14 @@ nav .link-container .nav-link {
   transition: 0.2s all ease-in-out;
 }
 
+nav .link-container .nav-link:hover {
+  transform: scale(1.1);
+}
+
 .nav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--yellow);
   background-color: var(--background-dark);
   padding: 0.5rem;
@@ -113,6 +133,10 @@ nav .link-container .nav-link {
   cursor: pointer;
   border: none;
   transition: 0.2s all ease-in-out;
+}
+
+.nav-button:hover {
+  transform: scale(1.1);
 }
 
 .light-button {
@@ -178,7 +202,7 @@ footer > div > p {
   justify-content: space-around;
   max-width: 80%;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 3rem auto;
 }
 
 form {
@@ -186,9 +210,9 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 300px;
-  height: 200px;
-  padding: 10px;
+  width: 400px;
+  height: 400px;
+  padding: 25px;
   border-radius: 10px;
   margin: 0 auto;
   box-shadow: 0px 5px 10px 10px rgba(232, 232, 232, 0.2),
@@ -206,21 +230,22 @@ form.dark-mode {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 45%;
 }
 
 .form-section {
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.7rem;
+  margin-bottom: 1rem;
 }
 
 .form-section > label {
-  font-size: 12px;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .form-section > input {
-  padding: 10px;
+  padding: 15px 10px;
   border: none;
   border-radius: 10px;
 }
@@ -234,7 +259,7 @@ form.dark-mode {
 form > button {
   border: none;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 20px 10px;
 }
 
 .card {
@@ -242,19 +267,29 @@ form > button {
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
-  max-width: 200px;
-  width: 200px;
+  max-width: 225px;
+  width: 100%;
   padding: 0.5rem 0.5rem 0 0.5rem;
-  border: 0.5px solid rgb(136, 136, 136);
   box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.2), 0 10px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
+  border-radius: 15px;
   transition: 0.2s all ease-in-out;
 }
-.card p {
+
+.card > div {
+  max-width: 80%;
+  width: 100%;
+  min-width: 80%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.card > div > p {
   margin: 10px 0px;
 }
 
-.card img {
+.card > img {
   max-width: fit-content;
   width: 100%;
   border-radius: 20px;
@@ -269,6 +304,7 @@ form > button {
   color: var(--background-light);
   font-weight: 500;
   box-shadow: 0px 10px 9px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
 }
 
 .card-dark:hover {
@@ -280,7 +316,6 @@ form > button {
 
 .card-grid {
   display: flex;
-  /* width: 90vw; */
   width: 100%;
   max-width: 85%;
   justify-content: left;
@@ -293,22 +328,59 @@ form > button {
 
 .isNotFavorite {
   color: var(--background-light);
-  background-color: rgba(48, 48, 48, 0.5);
+  background-color: var(--button-card-bg-dark);
 }
 
 .isNotFavorite-dark {
-  color: var(--background-light);
-  background-color: rgba(232, 232, 232, 0.5);
+  color: var(--background-dark);
+  background-color: var(--button-card-bg-light);
 }
 
 .isFavorite {
   color: var(--yellow);
-  background-color: rgba(48, 48, 48, 0.5);
+  background-color: var(--button-card-bg-pressed-light);
 }
 
 .isFavorite-dark {
-  color: var(--darkyellow);
-  background-color: rgba(232, 232, 232, 0.5);
+  color: var(--yellow);
+  background-color: var(--button-card-bg-pressed-dark);
+}
+
+.details-card {
+  max-width: calc(80% - 20px);
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 2rem;
+  border-radius: 15px;
+  gap: 40px;
+
+  background-color: var(--background-light);
+  color: var(--background-dark);
+}
+
+.details-card > .details-container > .card-property {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-card > .details-container > .card-property > p {
+  font-size: 1.5rem;
+}
+
+.details-card > img {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.details-card.dark-mode {
+  background-color: var(--background-dark);
+  color: var(--background-light);
 }
 
 table {
@@ -316,12 +388,12 @@ table {
   border-spacing: 0;
   width: calc(100% - 100px);
   display: table;
-  margin: auto;
-  border: 1px solid var(--background-dark);
+  margin: 3rem auto;
+  border: 3px solid var(--background-dark);
   transition: 0.2s all ease-in-out;
 }
 
-table .dark-mode {
+table.dark-mode {
   border: 1px solid var(--background-light);
 }
 
@@ -331,10 +403,11 @@ th {
   text-align: left;
   padding: 8px;
   transition: 0.2s all ease-in-out;
+  font-size: 1.5rem;
 }
 
-td .dark-mode,
-th .dark-mode {
+td.dark-mode,
+th.dark-mode {
   border: 1px solid var(--background-light);
 }
 
@@ -372,12 +445,54 @@ footer > .section > a > img {
   position: absolute;
   max-width: fit-content;
   width: 100%;
-  top: 10px;
+  top: 50px;
   left: 50px;
 }
 
+.modeChangeButton {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  max-width: fit-content;
+  width: 100%;
+  top: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s all ease-in-out;
+}
+
+.table_mode {
+  right: 120px;
+  color: var(--background-dark);
+}
+
+.table_mode.dark {
+  color: var(--background-light);
+}
+
+.table_mode:disabled {
+  color: var(--button-disabled) !important;
+  cursor: not-allowed;
+}
+
+.card_mode {
+  right: 50px;
+  color: var(--background-light);
+}
+
+.card_mode.dark {
+  color: var(--background-dark);
+}
+
+.card_mode:disabled {
+  color: var(--button-disabled) !important;
+  cursor: not-allowed;
+}
+
 .details-container {
-  padding: 2rem 0;
+  padding: 4rem 0;
 }
 
 .message {
@@ -388,4 +503,31 @@ footer > .section > a > img {
   width: 100%;
   bottom: -100px;
   left: 0;
+}
+
+.error-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-container > p {
+  font-size: 1.5rem;
+}
+
+.error-container > a {
+  font-size: 1.25rem;
+  background-color: var(--background-dark);
+  color: var(--background-light);
+  font-weight: 500;
+  padding: 15px;
+  border-radius: 20px;
+  transition: 0.2s all ease-in-out;
+}
+
+.error-container > a.dark-nav-link {
+  background-color: var(--background-light);
+  color: var(--background-dark) !important;
 }

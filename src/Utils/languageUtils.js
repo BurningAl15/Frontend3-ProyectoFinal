@@ -23,6 +23,11 @@ export const Languages = [
       emailTable: "E-mail",
       errorName: "Please enter a full name (first and last)",
       errorEmail: "Please enter an email",
+      noFavsYet: "No Dentists set as favorites yet",
+      noFavsText: "To select some favorite dentists",
+      goToHome: "Go to Home",
+      error404: "Error 404 - Page not Found",
+      contactUs: "Contact Us",
     },
   },
   {
@@ -50,6 +55,11 @@ export const Languages = [
       errorName:
         "Por favor, ingrese un nombre completo (primer y último apellido)",
       errorEmail: "Por favor, ingrese un correo electrónico válido",
+      noFavsYet: "Aún no se ha establecido ningún dentista como favorito",
+      noFavsText: "Para seleccionar algunos dentistas favoritos",
+      goToHome: "Ir a Inicio",
+      error404: "Error 404 - Página no encontrada",
+      contactUs: "Contáctanos",
     },
   },
   {
@@ -77,6 +87,11 @@ export const Languages = [
       errorName:
         "Por favor, digite um nome completo (primeiro e último sobrenome)",
       errorEmail: "Por favor, digite um endereço de e-mail válido",
+      noFavsYet: "Ainda não há dentistas definidos como favoritos",
+      noFavsText: "Para selecionar alguns dentistas favoritos",
+      goToHome: "Ir para Início",
+      error404: "Erro 404 - Página não encontrada",
+      contactUs: "Entre em contato",
     },
   },
   {
@@ -103,6 +118,11 @@ export const Languages = [
       emailTable: "E-mail",
       errorName: "Per favore, inserisci un nome completo (nome e cognome)",
       errorEmail: "Per favore, inserisci un indirizzo email valido",
+      noFavsYet: "Nessun dentista è stato ancora impostato come preferito",
+      noFavsText: "Per selezionare alcuni dentisti preferiti",
+      goToHome: "Vai a Home",
+      error404: "Errore 404 - Pagina non trovata",
+      contactUs: "Contattaci",
     },
   },
 ];
@@ -123,7 +143,6 @@ export const messageComplete = (language, name) => {
   return `${messageStart}${name}${messageEnd}`;
 };
 
-
 export const languageOptions = () => {
   const options = Languages.map((language) => ({
     value: language.key,
@@ -131,9 +150,9 @@ export const languageOptions = () => {
   }));
 
   return options;
-}
+};
 
 export const defaultOption = (language) => {
   const filtered = Languages.filter((la) => la.key === language)[0];
   return { value: filtered.key, label: filtered.language };
-}
+};

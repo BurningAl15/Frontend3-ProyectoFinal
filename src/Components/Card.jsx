@@ -4,7 +4,11 @@ import { routes } from "../Utils/routes";
 import { FaStar } from "react-icons/fa";
 import { useGlobalContext } from "../Context/global.context";
 import { getCurrentLanguage } from "../Utils/languageUtils";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import { CiBookmarkCheck } from "react-icons/ci";
+import { FaRegAddressBook } from "react-icons/fa";
+import { IoPersonOutline } from "react-icons/io5";
+
 
 const Card = ({ name, username, id }) => {
   const {
@@ -41,8 +45,9 @@ const Card = ({ name, username, id }) => {
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
       <Link
-        className={`card ${theme === "dark" ? "card-dark layout" : "layout-bg"
-          }`}
+        className={`card ${
+          theme === "dark" ? "card-dark layout" : "layout-bg"
+        }`}
         to={`${routes.detail}/${id}`}
       >
         <img src={doctorImage} alt={`avatar`} />
@@ -50,23 +55,36 @@ const Card = ({ name, username, id }) => {
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage
          */}
-        <p>{name}</p>
-        <p>{username}</p>
+        <div>
+          <FaRegAddressBook size={20} />
+          <p>{name}</p>
+        </div>
+        <div>
+          <IoPersonOutline size={20} />
+          <p>{username}</p>
+        </div>
         <button
           onClick={async (e) => {
             if (checkIfIsFavorite(id)) await deleteFavorites(e);
             else await addFavourite(e);
           }}
-          className={`favButton ${checkIfIsFavorite(id)
-            ? theme === "dark"
-              ? "isFavorite"
-              : "isFavorite-dark"
-            : theme === "dark"
+          className={`favButton ${
+            checkIfIsFavorite(id)
+              ? theme === "dark"
+                ? "isFavorite"
+                : "isFavorite-dark"
+              : theme === "dark"
               ? "isNotFavorite"
               : "isNotFavorite-dark"
-            }`}
+          }`}
         >
-          {checkIfIsFavorite(id) ? <FaStar /> : addFV}
+          {checkIfIsFavorite(id) ? (
+            <FaStar size={25} />
+          ) : (
+            <>
+              <CiBookmarkCheck size={25} /> <p>{addFV}</p>
+            </>
+          )}
         </button>
       </Link>
     </motion.div>

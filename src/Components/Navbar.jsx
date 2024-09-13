@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import { routes } from "../Utils/routes";
-import Select from 'react-select';
+import Select from "react-select";
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 import darkModeTitle from "../assets/DarkModeTitle.png";
 import lightModeTitle from "../assets/LightModeTitle.png";
 
+import { LuSunMoon } from "react-icons/lu";
 import { RiMoonFill } from "react-icons/ri";
 import { useGlobalContext } from "../Context/global.context";
-import { getCurrentLanguage, getCurrentLanguage_Obj, languageOptions, defaultOption } from "../Utils/languageUtils";
-
-
+import {
+  getCurrentLanguage,
+  getCurrentLanguage_Obj,
+  languageOptions,
+  defaultOption,
+} from "../Utils/languageUtils";
 
 const Navbar = () => {
   const { theme, toggleTheme, language, setLanguage } = useGlobalContext();
@@ -54,23 +58,23 @@ const Navbar = () => {
           className={`nav-button ${theme === "dark" ? "light-button" : ""}`}
           onClick={() => toggleTheme()}
         >
-          <RiMoonFill />
+          {theme === "dark" ? <LuSunMoon /> : <RiMoonFill />}
         </button>
 
-        {/* ! Instead of this, do a dropdown */}
-        <Select options={languageOptions()}
+        <Select
+          options={languageOptions()}
           styles={{
             control: (base) => ({
               ...base,
-              width: 120, // Set the desired width here
+              width: 120,
             }),
           }}
           defaultValue={() => defaultOption(language)}
           onChange={(selectedOption) => {
             getCurrentLanguage_Obj(selectedOption);
-            setLanguage(selectedOption.value)
-          }} />
-
+            setLanguage(selectedOption.value);
+          }}
+        />
       </div>
     </nav>
   );

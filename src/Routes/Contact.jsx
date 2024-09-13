@@ -3,6 +3,7 @@ import Form from "../Components/Form";
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 import { useGlobalContext } from "../Context/global.context";
 import { getCurrentLanguage } from "../Utils/languageUtils";
+import { ToastContainer } from "react-toastify";
 
 const Contact = () => {
   const { theme, language } = useGlobalContext();
@@ -19,6 +20,7 @@ const Contact = () => {
         <p>{contactText}</p>
       </div>
       <Form theme={theme} language={language} />
+      <ToastContainer />
     </div>
   );
 };

@@ -4,8 +4,8 @@ import { useGlobalContext } from "../Context/global.context";
 import useFetchData from "../hooks/useFetchData";
 import { Loader } from "../Components/Loader";
 import { ToastContainer } from "react-toastify";
-import { Link } from "react-router-dom";
 import { getCurrentLanguage } from "../Utils/languageUtils";
+import { EmptyFavs } from "../Components/EmptyFavs";
 
 const Favs = () => {
   const { theme, favIds, language } = useGlobalContext();
@@ -52,14 +52,7 @@ const Favs = () => {
             />
           ))}
 
-        {favIds.length <= 0 && (
-          <div>
-            <p>No Dentists set as favorites yet</p>
-            {/* Img */}
-            <Link to="/">Go to Home</Link>
-            <p>To select some favorite dentists</p>
-          </div>
-        )}
+        {favIds.length <= 0 && <EmptyFavs language={language} theme={theme} />}
       </div>
 
       <ToastContainer />

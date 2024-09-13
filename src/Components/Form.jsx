@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getCurrentLanguage, messageComplete } from "../Utils/languageUtils";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   name: "",
@@ -14,6 +16,7 @@ const Form = ({ theme, language }) => {
   const [errors, setErrors] = useState(initialState);
 
   const [show, setShow] = useState(false);
+  const notifySubmit = (name) => toast(`${messageComplete(language, name)}`);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,7 +30,7 @@ const Form = ({ theme, language }) => {
 
   const currentLanguage = getCurrentLanguage(language);
 
-  const { fullName, email, send, errorName, errorEmail } =
+  const { fullName, email, send, errorName, errorEmail, contactUs } =
     currentLanguage.words;
 
   const handleChange = (e) => {
@@ -38,6 +41,7 @@ const Form = ({ theme, language }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    notifySubmit(user.name);
     setSavedUser({ ...user });
     setShow(true);
     setUser(initialState);
@@ -81,12 +85,14 @@ const Form = ({ theme, language }) => {
     <>
       <motion.form
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        initial={{ opacity: 0, scale: 0.5, y: -500 }}
+        initial={{ opacity: 0, scale: 0.5, y: 1000 }}
         transition={{ duration: 1, ease: "easeInOut" }}
         onSubmit={handleSubmit}
         className={theme === "light" ? "dark-mode" : ""}
       >
         <div className="form-container">
+          <h2>{contactUs}</h2>
+
           <div className="form-section">
             <label htmlFor="name">{fullName}</label>
             <input
